@@ -2,6 +2,6 @@
 {
     public interface IStringSubtractor
     {
-        string Subtruction(string term1, string term2);
+        string Subtract(string term1, string term2);
     }
 }

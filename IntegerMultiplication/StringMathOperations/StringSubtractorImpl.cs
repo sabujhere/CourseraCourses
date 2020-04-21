@@ -8,7 +8,7 @@ namespace StringMathOperations
 {
     public class StringSubtractorImpl : IStringSubtractor
     {
-        public string Subtruction(string term1, string term2)
+        public string Subtract(string term1, string term2)
         {
             if (term1.Length < term2.Length)
             {
@@ -16,8 +16,8 @@ namespace StringMathOperations
             }
             else if(term1.Length == term2.Length)
             {
-                var leftMostDigitInTerm1 = int.Parse(term1.Substring(term1.Length, 1));
-                var leftMostDigitInTerm2 = int.Parse(term2.Substring(term1.Length, 1));
+                var leftMostDigitInTerm1 = int.Parse(term1.Substring(term1.Length - 1, 1));
+                var leftMostDigitInTerm2 = int.Parse(term2.Substring(term1.Length - 1, 1));
                 if(leftMostDigitInTerm1 < leftMostDigitInTerm2)
                     Utils.Swap(ref term1,ref term2);
             }
@@ -36,8 +36,12 @@ namespace StringMathOperations
                     carry = 1;
                     num1+= 10;
                 }
+                else
+                {
+                    carry = 0;
+                }
                 var temp = num1 - num2;
-                result = result.Insert(0, $"{temp % 10}");
+                result = result.Insert(0, $"{temp}");
             }
             return result;
         }
