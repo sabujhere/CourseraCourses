@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace StringMathOperations
 {
-    public class StringAdditionImpl:IStringAddition
+    public class StringAdditionImpl : IStringAddition
     {
         public string Add(string term1, string term2)
         {
             if (term1.Length < term2.Length)
             {
-                Swap(ref term1,ref term2);
+                Utils.Swap(ref term1,ref term2);
             }
 
-            term2 = term2.PadLeft(term1.Length);
+            term2 = term2.PadLeft(term1.Length,'0');
 
             string result = string.Empty;
             int carry = 0;
@@ -27,15 +27,11 @@ namespace StringMathOperations
                 carry = temp / 10;
                 result = result.Insert(0, $"{temp % 10}");
             }
-            result = result.Insert(0, $"{carry}");
+            if(carry != 0)
+                result = result.Insert(0, $"{carry}");
             return result;
         }
 
-        public void Swap(ref string term1, ref string term2)
-        {
-            var temp = term1;
-            term1 = term2;
-            term2 = temp;
-        }
+        
     }
 }

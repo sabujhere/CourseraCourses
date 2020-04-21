@@ -8,13 +8,27 @@ namespace StringMathOperationTest
     public class StringAdditionTest
     {
         [TestMethod]
-        public void AddTwoNumbers()
+        public void AddTwoNumbers_WithEqualNumberOfDigits()
         {
             var additionHelper = new StringAdditionImpl();
+            var term1 = "5782";
+            var term2 = "7329";
+            var exptectedResult = int.Parse(term1) + int.Parse(term2);
+            var result = additionHelper.Add(term1, term2);
 
-            var result = additionHelper.Add("5782", "7329");
+            Assert.AreEqual(exptectedResult.ToString(),result);
+        }
 
-            Assert.AreEqual("13111",result);
+        [TestMethod]
+        public void AddTwoNumbers_WithUnEqualNumberOfDigits()
+        {
+            var additionHelper = new StringAdditionImpl();
+            var term1 = "5782";
+            var term2 = "73";
+            var exptectedResult = int.Parse(term1) + int.Parse(term2);
+            var result = additionHelper.Add("5782", "73");
+
+            Assert.AreEqual(exptectedResult.ToString(),result);
         }
     }
 }
