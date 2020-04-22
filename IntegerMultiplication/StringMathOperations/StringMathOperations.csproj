@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IStringMultiplicator.cs" />
     <Compile Include="IStringAddition.cs" />
     <Compile Include="IStringSubtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringAdditionImpl.cs" />
+    <Compile Include="KaratsubaStringMultiplicationImpl.cs" />
     <Compile Include="StringSubtractorImpl.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>

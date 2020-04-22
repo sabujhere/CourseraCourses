@@ -52,6 +52,7 @@
     <Compile Include="StringAdditionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringSubtractionTest.cs" />
+    <Compile Include="KaratsubaStringMultiplicationImplTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

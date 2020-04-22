@@ -10,18 +10,24 @@ namespace StringMathOperations
     {
         public string Subtract(string term1, string term2)
         {
-            if (term1.Length < term2.Length)
+            //if (term1.Length < term2.Length)
+            //{
+            //    Utils.Swap(ref term1,ref term2);
+            //}
+            //else if(term1.Length == term2.Length)
+            //{
+            //    var leftMostDigitInTerm1 = int.Parse(term1.Substring(term1.Length - 1, 1));
+            //    var leftMostDigitInTerm2 = int.Parse(term2.Substring(term1.Length - 1, 1));
+            //    if(leftMostDigitInTerm1 < leftMostDigitInTerm2)
+            //        Utils.Swap(ref term1,ref term2);
+            //}
+
+            bool resultNegative = false;
+            if (Utils.StringIsSmaller(term1, term2))
             {
                 Utils.Swap(ref term1,ref term2);
+                resultNegative = true;
             }
-            else if(term1.Length == term2.Length)
-            {
-                var leftMostDigitInTerm1 = int.Parse(term1.Substring(term1.Length - 1, 1));
-                var leftMostDigitInTerm2 = int.Parse(term2.Substring(term1.Length - 1, 1));
-                if(leftMostDigitInTerm1 < leftMostDigitInTerm2)
-                    Utils.Swap(ref term1,ref term2);
-            }
-
             term2 = term2.PadLeft(term1.Length, '0');
 
             string result = string.Empty;
@@ -41,9 +47,10 @@ namespace StringMathOperations
                     carry = 0;
                 }
                 var temp = num1 - num2;
-                result = result.Insert(0, $"{temp}");
+                result = result.Insert(0, temp.ToString());
             }
-            return result;
+            result = Utils.SanitizeResult(result);
+            return resultNegative ? result.Insert(0, "-") : result;
         }
     }
 }
