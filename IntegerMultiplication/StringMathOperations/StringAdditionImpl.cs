@@ -28,8 +28,8 @@ namespace StringMathOperations
                 result = result.Insert(0, $"{temp % 10}");
             }
             if(carry != 0)
-                result = result.Insert(0, $"{carry}");
-            return result;
+                result = result.Insert(0, carry.ToString());
+            return Utils.SanitizeResult(result);
         }
 
         
