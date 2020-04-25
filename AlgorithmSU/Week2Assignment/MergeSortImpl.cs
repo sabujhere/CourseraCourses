@@ -53,10 +53,12 @@ namespace Week2Assignment
                 else if(sortedLeft.Count == 0)
                 {
                     result.AddRange(sortedRight);
+                    sortedRight.Clear();
                 }
                 else
                 {
                     result.AddRange(sortedLeft);
+                    sortedLeft.Clear();
                 }
             }
 
