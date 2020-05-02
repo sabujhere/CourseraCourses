@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Week2Assignment
+namespace Assignment.Common
 {
     public interface ISort<T> where T : IComparable<T>
     {
