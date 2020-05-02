@@ -15,37 +15,36 @@ namespace Week3Assignment
         public ICollection<T> Sort(ICollection<T> unsortedCollection)
         {
             var unsortedArray = unsortedCollection.ToArray();
-            Sort(ref unsortedArray,unsortedArray.Length,0);
+            Sort(ref unsortedArray,0,unsortedArray.Length-1);
             return unsortedArray;
-
         }
 
-        private void Sort(ref T[] unsortedArray, int itemsToSortCount, int startIndex)
+        private void Sort(ref T[] unsortedArray, int startIndex, int endIndex)
         {
             Debug.WriteLine("Sorting:");
-            for (int i = startIndex; i < startIndex + itemsToSortCount; i++)
+            for (int i = startIndex; i <= endIndex; i++)
             {
                 Debug.WriteLine(unsortedArray[i]);
             }
-            if(itemsToSortCount <= 1) return;
+            if(endIndex - startIndex <= 1) return;
             var pivotIndex = startIndex;
 
             //partition around pivot
-            int partitionIndex = Partition(ref unsortedArray, itemsToSortCount,startIndex, pivotIndex);
+            int partitionIndex = Partition(ref unsortedArray, startIndex,endIndex, pivotIndex);
 
             //sort left
-            Sort(ref unsortedArray, partitionIndex - startIndex-1, startIndex);
+            Sort(ref unsortedArray, startIndex, partitionIndex -1);
             
             //sort right
-            Sort(ref unsortedArray, unsortedArray.Length - partitionIndex-1, partitionIndex+1);
+            Sort(ref unsortedArray, partitionIndex+1,unsortedArray.Length - 1);
         }
 
 
-        private int Partition(ref T[] unsortedArray, int itemsToCount, int startIndex, int pivotIndex)
+        private int Partition(ref T[] unsortedArray, int startIndex,int endIndex, int pivotIndex)
         {
-            var isPivotIndexValid = pivotIndex >= startIndex && pivotIndex <= startIndex + itemsToCount;
+            var isPivotIndexValid = pivotIndex >= startIndex && pivotIndex <= endIndex;
             if(!isPivotIndexValid)
-                throw new Exception($"Pivot index not valid, PivotIndex: {pivotIndex}, startIndex:{startIndex}, ItemCount: {itemsToCount}");
+                throw new Exception($"Pivot index not valid, PivotIndex: {pivotIndex}, startIndex:{startIndex}, endIndex: {endIndex}");
 
             if(pivotIndex != startIndex)
                 Swap(ref unsortedArray, pivotIndex,startIndex);
@@ -53,11 +52,10 @@ namespace Week3Assignment
             pivotIndex = startIndex;
             var pivotItem = unsortedArray[pivotIndex];
             var i = pivotIndex + 1;
-            for (int j = pivotIndex+1; j < startIndex + itemsToCount; j++)
+            for (int j = pivotIndex+1; j <= endIndex; j++)
             {
                 if (pivotItem.CompareTo(unsortedArray[j]) > 0)
                 {
-
                     //swap(i, j)
                     Swap(ref unsortedArray, i, j);
                     i++;
