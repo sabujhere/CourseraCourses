@@ -16,7 +16,9 @@ namespace Week3AssignmentTest
             {
                 3,8,2,5,1,4,7,6
             };
-            var sorter = new QuickSortImpl<int>();
+
+            IPivotPositionFinder pivotPositionFinder = new GetFirstIndexAsPivotImpl();
+            var sorter = new QuickSortImpl<int>(pivotPositionFinder);
 
             var sortedResultActual = sorter.Sort(unsortedCollection);
 

@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetEndIndexAsPivotImpl.cs" />
+    <Compile Include="GetFirstIndexAsPivotImpl.cs" />
+    <Compile Include="GetRandomIndexAsPivotImpl.cs" />
+    <Compile Include="IPivotPositionFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickSortImpl.cs" />
   </ItemGroup>

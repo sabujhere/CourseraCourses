@@ -11,6 +11,12 @@ namespace Week3Assignment
 {
     public class QuickSortImpl<T> : ISort<T> where T : IComparable<T>
     {
+        public IPivotPositionFinder PivotPositionFinder { get; private set; }
+
+        public QuickSortImpl(IPivotPositionFinder pivotPositionFinder)
+        {
+            PivotPositionFinder = pivotPositionFinder;
+        }
 
         public ICollection<T> Sort(ICollection<T> unsortedCollection)
         {
@@ -21,13 +27,8 @@ namespace Week3Assignment
 
         private void Sort(ref T[] unsortedArray, int startIndex, int endIndex)
         {
-            Debug.WriteLine("Sorting:");
-            for (int i = startIndex; i <= endIndex; i++)
-            {
-                Debug.WriteLine(unsortedArray[i]);
-            }
             if(endIndex - startIndex <= 1) return;
-            var pivotIndex = startIndex;
+            var pivotIndex = PivotPositionFinder.Get(startIndex,endIndex);
 
             //partition around pivot
             int partitionIndex = Partition(ref unsortedArray, startIndex,endIndex, pivotIndex);
