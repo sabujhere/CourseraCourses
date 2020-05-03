@@ -62,6 +62,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\input_dgrcode_01_5.txt" />
+    <Content Include="TestData\input_dgrcode_06_10.txt" />
+    <Content Include="TestData\input_dgrcode_15_20.txt" />
     <Content Include="TestData\QuickSort.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
