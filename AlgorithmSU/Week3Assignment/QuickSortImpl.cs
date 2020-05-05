@@ -11,11 +11,11 @@ namespace Week3Assignment
 {
     public class QuickSortImpl<T> : ISort<T> where T : IComparable<T>
     {
-        public IPivotPositionFinder PivotPositionFinder { get; private set; }
+        public IPivotPositionFinder<T> PivotPositionFinder { get; private set; }
 
         public long ComparisonCount { get; private set; }
 
-        public QuickSortImpl(IPivotPositionFinder pivotPositionFinder)
+        public QuickSortImpl(IPivotPositionFinder<T> pivotPositionFinder)
         {
             PivotPositionFinder = pivotPositionFinder;
         }
@@ -30,10 +30,10 @@ namespace Week3Assignment
 
         private void Sort(ref T[] unsortedArray, int startIndex, int endIndex)
         {
-            PrintArray(unsortedArray, startIndex, endIndex);
+            //PrintArray(unsortedArray, startIndex, endIndex);
             if(endIndex - startIndex < 1) return;
             ComparisonCount += endIndex - startIndex;
-            var pivotIndex = PivotPositionFinder.Get(startIndex,endIndex);
+            var pivotIndex = PivotPositionFinder.Get(unsortedArray,startIndex,endIndex);
             if(pivotIndex != startIndex)
                 Swap(ref unsortedArray, pivotIndex,startIndex);
             

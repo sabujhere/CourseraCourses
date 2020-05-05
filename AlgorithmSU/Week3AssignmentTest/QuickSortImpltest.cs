@@ -18,7 +18,7 @@ namespace Week3AssignmentTest
                 3,8,2,5,1,4,7,6
             };
 
-            IPivotPositionFinder pivotPositionFinder = new GetFirstIndexAsPivotImpl();
+            IPivotPositionFinder<int> pivotPositionFinder = new GetFirstIndexAsPivotImpl<int>();
             var sorter = new QuickSortImpl<int>(pivotPositionFinder);
 
             var sortedResultActual = sorter.Sort(unsortedCollection);
@@ -36,7 +36,7 @@ namespace Week3AssignmentTest
                 Assert.Fail("File not found");
             var lines = File.ReadAllLines(fileLocation);
             var unsortedCollection = lines.Select(line => Convert.ToInt32(line)).ToList();
-            IPivotPositionFinder pivotPositionFinder = new GetFirstIndexAsPivotImpl();
+            IPivotPositionFinder<int> pivotPositionFinder = new GetFirstIndexAsPivotImpl<int>();
             var sorter = new QuickSortImpl<int>(pivotPositionFinder);
             var expectedComparison = 6;
             //Act
@@ -56,9 +56,9 @@ namespace Week3AssignmentTest
                 Assert.Fail("File not found");
             var lines = File.ReadAllLines(fileLocation);
             var unsortedCollection = lines.Select(line => Convert.ToInt32(line)).ToList();
-            IPivotPositionFinder pivotPositionFinder = new GetFirstIndexAsPivotImpl();
+            IPivotPositionFinder<int> pivotPositionFinder = new GetMedianOfThreeGetRandomIndexAsPivotImpl<int>();
             var sorter = new QuickSortImpl<int>(pivotPositionFinder);
-            var expectedComparison = 26;
+            var expectedComparison = 21;
             //Act
             var sortedResultActual = sorter.Sort(unsortedCollection);
 
@@ -74,9 +74,9 @@ namespace Week3AssignmentTest
 
             if (!File.Exists(fileLocation))
                 Assert.Fail("File not found");
-            var lines = File.ReadAllLines(fileLocation).Take(10);
+            var lines = File.ReadAllLines(fileLocation);
             var unsortedCollection = lines.Select(line => Convert.ToInt32(line)).ToList();
-            IPivotPositionFinder pivotPositionFinder = new GetFirstIndexAsPivotImpl();
+            IPivotPositionFinder<int> pivotPositionFinder = new GetFirstIndexAsPivotImpl<int>();
             var sorter = new QuickSortImpl<int>(pivotPositionFinder);
             //Act
             var sortedResultActual = sorter.Sort(unsortedCollection);
@@ -85,6 +85,72 @@ namespace Week3AssignmentTest
             //Assert.AreEqual(expectedComparison,sorter.ComparisonCount);
             CollectionAssert.AreEqual(unsortedCollection.OrderBy(item=>item).ToList(),sortedResultActual.ToList());
 
+        }
+
+        [TestMethod]
+        public void Sort_UsingFirstItemAsPivot_ExpectedComparisonCountMatches()
+        {
+            //Arrange
+            var fileLocation = @"..\..\TestData\QuickSort.txt";
+
+            if (!File.Exists(fileLocation))
+                Assert.Fail("File not found");
+            var lines = File.ReadAllLines(fileLocation);
+            var unsortedCollection = lines.Select(line => Convert.ToInt32(line)).ToList();
+            IPivotPositionFinder<int> pivotPositionFinder = new GetFirstIndexAsPivotImpl<int>();
+            var sorter = new QuickSortImpl<int>(pivotPositionFinder);
+            var expectedComparison = 162085;
+            //Act
+            var sortedResultActual = sorter.Sort(unsortedCollection);
+
+            //Assert
+            Assert.AreEqual(expectedComparison,sorter.ComparisonCount);
+            //162085
+            CollectionAssert.AreEqual(unsortedCollection.OrderBy(item=>item).ToList(),sortedResultActual.ToList());
+        }
+
+        [TestMethod]
+        public void Sort_UsingEndIndexAsPivot_ExpectedComparisonCountMatches()
+        {
+            //Arrange
+            var fileLocation = @"..\..\TestData\QuickSort.txt";
+
+            if (!File.Exists(fileLocation))
+                Assert.Fail("File not found");
+            var lines = File.ReadAllLines(fileLocation);
+            var unsortedCollection = lines.Select(line => Convert.ToInt32(line)).ToList();
+            IPivotPositionFinder<int> pivotPositionFinder = new GetEndIndexAsPivotImpl<int>();
+            var sorter = new QuickSortImpl<int>(pivotPositionFinder);
+            var expectedComparison = 164123;
+
+            //Act
+            var sortedResultActual = sorter.Sort(unsortedCollection);
+
+            //Assert
+            Assert.AreEqual(expectedComparison,sorter.ComparisonCount);
+            CollectionAssert.AreEqual(unsortedCollection.OrderBy(item=>item).ToList(),sortedResultActual.ToList());
+        }
+
+        [TestMethod]
+        public void Sort_UsingMedianOfThreeGetRandomIndexAsPivot_ExpectedComparisonCountMatches()
+        {
+            //Arrange
+            var fileLocation = @"..\..\TestData\QuickSort.txt";
+
+            if (!File.Exists(fileLocation))
+                Assert.Fail("File not found");
+            var lines = File.ReadAllLines(fileLocation);
+            var unsortedCollection = lines.Select(line => Convert.ToInt32(line)).ToList();
+            IPivotPositionFinder<int> pivotPositionFinder = new GetMedianOfThreeGetRandomIndexAsPivotImpl<int>();
+            var sorter = new QuickSortImpl<int>(pivotPositionFinder);
+            var expectedComparison = 138382;
+
+            //Act
+            var sortedResultActual = sorter.Sort(unsortedCollection);
+
+            //Assert
+            Assert.AreEqual(expectedComparison,sorter.ComparisonCount);
+            CollectionAssert.AreEqual(unsortedCollection.OrderBy(item=>item).ToList(),sortedResultActual.ToList());
         }
     }
 }

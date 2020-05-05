@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Week3Assignment
 {
-    public class GetEndIndexAsPivotImpl:IPivotPositionFinder
+    public class GetEndIndexAsPivotImpl<T> : IPivotPositionFinder<T> where T : IComparable<T>
     {
-        public int Get(int startIndex, int endIndex)
+        public int Get(T[] items, int startIndex, int endIndex)
         {
             return endIndex;
         }

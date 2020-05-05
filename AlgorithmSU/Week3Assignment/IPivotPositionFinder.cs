@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Week3Assignment
 {
-    public interface IPivotPositionFinder
+    public interface IPivotPositionFinder<T> where T : IComparable<T>
     {
-        int Get(int startIndex, int endIndex);
+        int Get(T[] items, int startIndex, int endIndex);
     }
 }

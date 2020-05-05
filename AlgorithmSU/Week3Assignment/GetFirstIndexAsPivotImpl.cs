@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Week3Assignment
 {
-    public class GetFirstIndexAsPivotImpl:IPivotPositionFinder
+    public class GetFirstIndexAsPivotImpl<T> : IPivotPositionFinder<T> where T : IComparable<T>
     {
-        public int Get(int startIndex, int endIndex)
+
+        public int Get(T[] items, int startIndex, int endIndex)
         {
             return startIndex;
         }
