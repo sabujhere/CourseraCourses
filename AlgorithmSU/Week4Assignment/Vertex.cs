@@ -10,7 +10,7 @@ namespace Week4Assignment
     {
         public int[] AdjacentVertexIds { get; private set; }
         public int Id { get; private set; }
-        public Vertex Parent { get; private set; }
+        public Vertex Parent { get; set; }
         public int Rank { get; set; }
 
         public Vertex(int id):this(id,null)
