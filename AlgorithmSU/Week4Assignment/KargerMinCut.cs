@@ -8,13 +8,15 @@ namespace Week4Assignment
 {
     public class KargerMinCut
     {
-        public IEnumerable<Vertex> Vertices { get; private set; }
-        public IEnumerable<Edge> Edges { get; private set; }
+        public List<Vertex> Vertices { get; private set; }
+        public List<Edge> Edges { get; private set; }
+        private readonly Random _rand = new Random();
 
         public KargerMinCut(IEnumerable<Vertex> vertices)
         {
-            Vertices = vertices;
-            Edges = Vertices.SelectMany(ver => ver.AdjacentVertexIds.Select(adjVId => new Edge(ver.Id, adjVId)));
+            Vertices = vertices.ToList();
+            Edges = Vertices.SelectMany(ver => ver.AdjacentVertexIds.Select(adjVId => new Edge(ver.Id, adjVId)))
+                .ToList();
         }
 
         public int GetCount()
@@ -25,7 +27,39 @@ namespace Week4Assignment
                 vertex.Rank = 0;
 
             }
-            return 0;
+
+            var numberOfEdgesToProcess = Edges.Count() - 1;
+            var mergedVertexCount = 0;
+            while (numberOfEdgesToProcess >= 0)
+            {
+                var randomEdgeIndexSelected = _rand.Next(0, numberOfEdgesToProcess);
+                var selectedEdge = Edges[randomEdgeIndexSelected];
+                Vertex mergedHead = Vertices[selectedEdge.HeadId - 1];// Vertices.First(v=>v.Id == selectedEdge.HeadId);
+                Vertex mergedTail = Vertices[selectedEdge.TailId - 1]; //Vertices.First(v => v.Id == selectedEdge.TailId);
+
+                Swap(randomEdgeIndexSelected, numberOfEdgesToProcess);
+                numberOfEdgesToProcess--;
+
+                if(UnionFind.Find(mergedHead).Id == UnionFind.Find(mergedTail).Id)
+                    continue;
+                
+                UnionFind.Union(mergedHead, mergedTail);
+                mergedVertexCount++;
+                if(mergedVertexCount == Vertices.Count() - 2)
+                    break;
+            }
+
+            int firstVerticeRootId = UnionFind.Find(Vertices.First()).Id;
+            var hashSet = new HashSet<int>(Vertices.Where(v => UnionFind.Find(v).Id == firstVerticeRootId).Select(v => v.Id));
+            var minCut = Edges.Count(e => hashSet.Contains(e.HeadId) && !hashSet.Contains(e.TailId));
+            return minCut;
+        }
+
+        private void Swap(int randomEdgeIndexSelected, int numberOfEdgesToProcess)
+        {
+            var temp = Edges[randomEdgeIndexSelected];
+            Edges[randomEdgeIndexSelected] = Edges[numberOfEdgesToProcess];
+            Edges[numberOfEdgesToProcess] = temp;
         }
     }
 }

@@ -31,5 +31,10 @@ namespace Week4Assignment
             if (ReferenceEquals(null, other)) return 1;
             return Id.CompareTo(other.Id);
         }
+
+        public override string ToString()
+        {
+            return $"{nameof(Id)}: {Id}";
+        }
     }
 }

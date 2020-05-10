@@ -56,6 +56,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\4Nodes.txt" />
+    <Content Include="TestData\8Nodes.txt" />
     <Content Include="TestData\SampleData_kargerMinCut.txt" />
   </ItemGroup>
   <ItemGroup>
