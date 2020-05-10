@@ -23,7 +23,7 @@ namespace Week4AssignmentTest
             foreach (var line in lines)
             {
                 var lineItems = line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
-                vertices.Add(new Vertex(int.Parse(lineItems.First()),lineItems.Skip(1).Select(adjV=>int.Parse(adjV)).ToArray()));
+                vertices.Add(new Vertex(int.Parse(lineItems.First()),lineItems.Skip(1).Select(int.Parse).ToArray()));
             }
             
         }
