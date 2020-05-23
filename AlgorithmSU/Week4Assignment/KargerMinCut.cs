@@ -34,8 +34,8 @@ namespace Week4Assignment
             {
                 var randomEdgeIndexSelected = _rand.Next(0, numberOfEdgesToProcess);
                 var selectedEdge = Edges[randomEdgeIndexSelected];
-                Vertex mergedHead = Vertices[selectedEdge.HeadId - 1];// Vertices.First(v=>v.Id == selectedEdge.HeadId);
-                Vertex mergedTail = Vertices[selectedEdge.TailId - 1]; //Vertices.First(v => v.Id == selectedEdge.TailId);
+                Vertex mergedHead = Vertices[selectedEdge.HeadId - 1];
+                Vertex mergedTail = Vertices[selectedEdge.TailId - 1]; 
 
                 Swap(randomEdgeIndexSelected, numberOfEdgesToProcess);
                 numberOfEdgesToProcess--;
