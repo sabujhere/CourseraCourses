@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Week5Assignment
@@ -10,39 +11,61 @@ namespace Week5Assignment
     {
         private long rankNew = 0;
         private int numSCC = 0;
+        private IEnumerable<KosarajuNode> nodes;
 
         public void Run(IEnumerable<KosarajuNode> graphNodes)
         {
-            var nodeById = graphNodes.ToDictionary(node => node.Id);
-            var orderedNode = nodeById.Values.OrderBy(node => node.Id);
-            Stack<KosarajuNode> processingNodesStack = new Stack<KosarajuNode>();
-            long rank = 0;
-            var secondIterationCollection = new KosarajuNode[nodeById.Values.Count];
-            rankNew = 0; // nodeById.Values.Count;
-            foreach (var currentOuterNode in orderedNode)
-            {
-                if (!currentOuterNode.Explored)
-                    DfsTopo(currentOuterNode, nodeById, secondIterationCollection);
-            }
+            nodes = graphNodes;
+            const int stackSize = 1024 * 1024 * 64;
+            var thread = new Thread(Dowork, stackSize);
+            thread.Start();
+            thread.Join();
 
-            secondIterationCollection = secondIterationCollection.ToList().Select(node =>
+
+           
+        }
+
+        private void Dowork()
+        {
+            try
             {
-                node.Explored = false;
-                return node;
-            }).ToArray();
-            //var sccNumber = 0;
-            numSCC = 0;
-            for (int i = secondIterationCollection.Length - 1; i >= 0; i--)
-            {
-                var currentOuterNode = secondIterationCollection[i];
-                if (!currentOuterNode.Explored)
+                var nodeById = nodes.ToDictionary(node => node.Id);
+                var orderedNode = nodeById.Values.OrderByDescending(node => node.Id);
+                Stack<KosarajuNode> processingNodesStack = new Stack<KosarajuNode>();
+                long rank = 0;
+                var secondIterationCollection = new KosarajuNode[nodeById.Values.Count];
+                rankNew = 0; // nodeById.Values.Count;
+                foreach (var currentOuterNode in orderedNode)
                 {
-                    numSCC = numSCC + 1;
-                    DfsTopoSCC(currentOuterNode, nodeById);
+                    if (!currentOuterNode.Explored)
+                        DfsTopo(currentOuterNode, nodeById, secondIterationCollection);
+                }
+
+                secondIterationCollection = secondIterationCollection.ToList().Select(node =>
+                {
+                    node.Explored = false;
+                    return node;
+                }).ToArray();
+
+                numSCC = 0;
+                for (int i = secondIterationCollection.Length - 1; i >= 0; i--)
+                {
+                    var currentOuterNode = secondIterationCollection[i];
+                    if (!currentOuterNode.Explored)
+                    {
+                        numSCC = numSCC + 1;
+                        DfsTopoSCC(currentOuterNode, nodeById);
+                    }
                 }
             }
-        
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+           
         }
+
         private void DfsTopoSCC(KosarajuNode currentNode, Dictionary<long, KosarajuNode> nodeById)
         {
             currentNode.Explored = true;

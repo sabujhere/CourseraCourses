@@ -26,7 +26,7 @@ namespace Week5Assignment
 
         public void AddAdjacentNode(long id)
         {
-            if(!_adjacentNodeIds.Contains(id))
+            //if(!_adjacentNodeIds.Contains(id))
                 _adjacentNodeIds.Add(id);
         }
 

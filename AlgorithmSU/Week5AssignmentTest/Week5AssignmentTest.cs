@@ -108,11 +108,11 @@ namespace Week5AssignmentTest
             graphAlgo.Run(nodesById.Values);
 
             //Assert
-            var result = nodesById.Values.GroupBy(node => node.SCCNumber).Take(5);
-            foreach (var group in result)
-            {
-                Console.WriteLine($"Member count: {group.Count()}");
-            }
+            var result = nodesById.Values.GroupBy(node => node.SCCNumber).OrderByDescending(grp => grp.Count()).Take(5).Select(grp=>grp.Count());
+            //foreach (var group in result)
+            //{
+            //    Console.WriteLine($"Member count: {group.Count()}");
+            //}
         }
 
 
@@ -162,6 +162,7 @@ namespace Week5AssignmentTest
             var nodesById = edges.Select(ed => ed.HeadNodeId)
                 .Concat(edges.Select(ed => ed.TailNodeId))
                 .Distinct()
+                .OrderBy(node=>node)
                 .Select(id => new KosarajuNode(id))
                 .ToDictionary(node => node.Id);
 
