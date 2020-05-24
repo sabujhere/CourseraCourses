@@ -25,6 +25,7 @@ namespace Week5Assignment
                     var currentNode = processingNodesStack.Pop();
                     if (currentNode.Explored)
                     {
+                        if(currentNode.CurrentLabel != 0) continue;
                         rank += 1;
                         currentNode.CurrentLabel = rank;
                         secondIterationCollection[rank - 1] = currentNode;
