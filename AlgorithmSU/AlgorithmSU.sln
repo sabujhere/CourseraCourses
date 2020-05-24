@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week4AssignmentTest", "Week
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week5Assignment", "Week5Assignment\Week5Assignment.csproj", "{D7A313E9-0EB1-41A5-961E-4B96B4F1936B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week5AssignmentTest", "Week5AssignmentTest\Week5AssignmentTest.csproj", "{1D1EE0DB-D4FC-457F-97DE-FDE1CFE0F918}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{D7A313E9-0EB1-41A5-961E-4B96B4F1936B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7A313E9-0EB1-41A5-961E-4B96B4F1936B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7A313E9-0EB1-41A5-961E-4B96B4F1936B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D1EE0DB-D4FC-457F-97DE-FDE1CFE0F918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1EE0DB-D4FC-457F-97DE-FDE1CFE0F918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1EE0DB-D4FC-457F-97DE-FDE1CFE0F918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1EE0DB-D4FC-457F-97DE-FDE1CFE0F918}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{97E745C9-4855-49F6-8819-37A4F598041F} = {A6A1BF7A-7EE6-4B69-A0EF-E9C75D4914D4}
 		{A83A2AA6-7226-4266-A6F4-E79A7275AA40} = {A6A1BF7A-7EE6-4B69-A0EF-E9C75D4914D4}
 		{0D2E1217-84E9-4F7B-9DD3-4327C7C75435} = {A6A1BF7A-7EE6-4B69-A0EF-E9C75D4914D4}
+		{1D1EE0DB-D4FC-457F-97DE-FDE1CFE0F918} = {A6A1BF7A-7EE6-4B69-A0EF-E9C75D4914D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92C409AD-71DA-4995-A5B6-D0D91AF277F4}

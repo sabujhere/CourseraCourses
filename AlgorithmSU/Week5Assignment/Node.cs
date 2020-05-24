@@ -24,15 +24,33 @@ namespace Week5Assignment
             Id = id;
         }
 
-        public void AddAdjacentNode(int id)
+        public void AddAdjacentNode(long id)
         {
             if(!_adjacentNodeIds.Contains(id))
                 _adjacentNodeIds.Add(id);
         }
 
+        protected bool Equals(Node other)
+        {
+            return Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Node) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
         public override string ToString()
         {
-            return $"{nameof(Id)}: {Id}, {nameof(AdjacentNodeIds)}: {AdjacentNodeIds}";
+            return $"{nameof(Id)}: {Id}, {nameof(AdjacentNodeIds)}: {string.Join(",",AdjacentNodeIds.ToList())}";
         }
     }
 
@@ -53,7 +71,13 @@ namespace Week5Assignment
 
         public IEnumerable<long> RevAdjacentNodeIds => _reverseAdjacentNodeIds;
 
-        public void AddRevAdjacentNode(int id)
+        public long CurrentLabel
+        {
+            get; 
+            set;
+        }
+
+        public void AddRevAdjacentNode(long id)
         {
             if (!_reverseAdjacentNodeIds.Contains(id))
                 _reverseAdjacentNodeIds.Add(id);
@@ -61,7 +85,7 @@ namespace Week5Assignment
 
         public override string ToString()
         {
-            return $"{base.ToString()},{nameof(RevAdjacentNodeIds)}: {RevAdjacentNodeIds}";
+            return $"{base.ToString()},{nameof(RevAdjacentNodeIds)}: {string.Join(",", RevAdjacentNodeIds.ToList())}";
         }
     }
 }
