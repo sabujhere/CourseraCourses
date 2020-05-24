@@ -62,6 +62,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\10Edges.txt" />
+    <Content Include="TestData\11Edges.txt" />
+    <Content Include="TestData\14Edges.txt" />
+    <Content Include="TestData\20Edges.txt" />
+    <Content Include="TestData\9Edges.txt" />
+    <Content Include="TestData\Another11Edges.txt" />
     <Content Include="TestData\SCC_Test.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
